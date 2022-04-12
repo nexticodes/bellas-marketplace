@@ -117,4 +117,27 @@ contract NFTMarket is ReentrancyGuard {
         // Transfer the amount defined by listingPrice, set by seller, to the contract owner (commission part).
         payable(owner).transfer(listingPrice);
     }
+
+    // View functions that return items
+    function fetchMarketItems() public view returns (MarketItem[] memory){
+        uint itemCount = _itemIds.current();
+        uint unsoldItemCount = _itemIds.current() - _itemsSold.current();
+        uint currentIndex = 0;
+
+        // create unsoldItems array w length of unsoldItemCount.
+        MarketItem[] memory items = new MarketItem[](unsoldItemCount);
+        for (uint i = 0; i < itemCount; i++){
+            // if address(0), means no address
+            // check to see if this market item has no address. Meaning unowned.
+            // if unowned, include in array of unsold items.
+            if (idToMarketItem[i + 1].owner == address(0)){
+                uint currentId = idToMarketItem[i+1].itemId;
+                MarketItem storage currentItem = idToMarketItem[currentId];
+                items[currentIndex] = currentItem;
+                currentIndex += 1;
+            }
+        }
+
+        return items;
+    }
 }
