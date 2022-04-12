@@ -24,7 +24,7 @@ function MyApp({ Component, pageProps }) {
               My Digital Assets
             </a>
           </Link>
-          <Link href="/">
+          <Link href="/creator-dashboard">
             <a className='mr-6 text-pink-500'>
               Creator Dashboard
             </a>
