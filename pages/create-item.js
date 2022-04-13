@@ -12,7 +12,7 @@ import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
 import Market from "../artifacts/contracts/NFTMarket.sol/NFTMarket.json";
 
 export default function CreateItem() {
-    const [fileUrl, setFileUrl] = useState(null);
+    const [fileUrl, setFileUrl] = useState('');
     const [formInput, setFormInput] = useState({
         price: "",
         name: "",
